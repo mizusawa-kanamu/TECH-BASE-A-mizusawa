@@ -1,0 +1,155 @@
+@charset "UTF-8";
+
+/*掲示板のデザイン案2 （使用言語:CSS）*/
+
+/*flexコンテナに指定*/
+.flexbox{
+	display: flex;
+
+	/*メモ：
+	  大きさを指定し背景をつけてブロックを表示。
+	  これを指定すると配置が分かるので、デバックしやすい*/
+
+	width: 400px;
+	height: 170px;
+
+	/*flexアイテムを垂直（上から下）に並べる*/
+	flex-direction: column;
+
+	/*flexアイテムが横一行に配置される。
+	　メモ：flexアイテムが縦に入らない場合、
+	　　　　横に配置される*/
+	flex-wrap: wrap;
+
+	/*flexアイテムを中央に置く*/
+	justify-content: center;
+
+}
+
+/*フォーム表示名のflexアイテム設定*/
+.name_box {
+	height:200px;
+	min-width: 100px; /*最小の長さを設定*/
+	min-height: 20px; /*最小の高さを設定*/
+	padding-bottom:5px;
+	text-align:right;
+}
+
+/*入力フォームのflexアイテム設定*/
+.form_box {
+	height:200px;
+	min-width: 100px;
+	min-height: 20px;
+	text-align:left;
+}
+
+/*消去、編集番号のflexアイテム設定*/
+.num_box {
+	height:130px;
+	min-width: 250px;
+	min-height: 20px;
+	text-align:center;
+}
+
+
+body{
+	/*中央寄せをする*/
+	margin: 0px;/* 外側の余白をゼロに */
+	padding: 0px 100px;/* 内側の余白を、上下無し、左右はあり */
+	background-color:#f1ffff;
+}
+
+/*メインコンテンツ*/
+.main{
+	padding-top:40px;
+}
+  
+/*コメントフォーム*/
+input.comment_form{
+	height:50px;
+}
+  
+ 
+/*コメントという文字*/
+.comment_char{
+	position: relative;
+	bottom:55px;
+}
+
+/*名前と送信ボタン*/
+.name_form{
+	position: relative;
+	right:20px;
+}
+
+/*パスワードの文字表示*/
+.password_char{
+	position:relative;
+	top:93px;
+}
+
+/*編集の入力欄*/
+input.edit_form{
+	width:20px;
+
+}
+
+/*消去の入力欄*/
+input.remove_form{
+	width:20px;
+}
+
+/*タイトル調節*/
+.midasi{
+	font-family:sans-serif;
+	font-size:35px;
+	padding:10px;
+	text-align:center;
+}
+
+/*入力欄*/
+.input_form{
+	padding:10px;
+	font-weight: 700; /*文字の太さ*/
+	border: solid 3px #e8e8e8;
+	border-radius: 10px;/*角の丸み*/
+}
+
+/*見出しの下の線*/
+hr.midasi_line{
+	border-top: 3px solid #b4eaf7;
+}
+
+/*コメントの下の線*/
+hr.comment_line{
+	border-top: 1px dashed #bbb;
+}
+
+/*入力欄のタイトル*/
+.form_title{
+	font-size:20px;
+	padding:10px;
+}
+
+/*投稿部*/
+.contens2{
+	padding-top:40px;
+	padding-bottom:8px;
+}
+
+/*テキストエリア*/
+textarea { 
+	font-family: sans-serif;
+}
+
+
+/*Microsoft Edge にだけ適応されるcss*/
+@supports (-ms-ime-align:auto) {
+
+	/*パスワードの文字表示*/
+	.password_char{
+		position:relative;
+		top:72px;
+	}
+
+}

@@ -293,7 +293,7 @@ if(strval($remove_num) != ''){
 					//最後のコメントではない
 					echo "<hr class=\"comment_line\">";
 				}else{
-					//最後のコメント
+					//最後のコメントである
 					echo "<hr class=\"frist_comment_line\">";
 				}
 				$i++;

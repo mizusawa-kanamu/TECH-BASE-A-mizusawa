@@ -339,5 +339,5 @@ if(strval($remove_num) != ''){
 			</div><!--input_form-->
 		</div><!--contens2-->
 		</div><!--main-->
-	</body>
+    </body>
 </html>

@@ -35,59 +35,59 @@
 
     //編集機能、新規投稿機能、どれを実行するか判定
     if(strval($edit_flag) != ''){
-    //編集フラグ入力あり
-    if(strval($name) != '' && strval($comment) != ''){
-        //名前とコメント入力あり
-        if($password != ''){
-            //パスワード入力あり
-            //データベースのパスワード取り出し処理
-            $sql = "SELECT * FROM board WHERE id = $edit_flag";
-
-            try{
-                $results =  $pdo -> query($sql);
-
-            }catch(Exception $e){
-                var_dump($e->getMessage());
-            }
-
-            foreach($results as $row){ //$rowの中にはテーブルのカラム名が入る
-                $base_password = $row['password']; //パスワード取り出し
-            }
-
-            if($base_password == $password){
-                //入力されたパスワードが正しい
-                //編集機能
-
-                //編集するsql
-                $sql = "update board set name='$name',comment='$comment' where id = $edit_flag";
+        //編集フラグ入力あり
+        if(strval($name) != '' && strval($comment) != ''){
+            //名前とコメント入力あり
+            if($password != ''){
+                //パスワード入力あり
+                //データベースのパスワード取り出し処理
+                $sql = "SELECT * FROM board WHERE id = $edit_flag";
 
                 try{
-                    //sql実行
                     $results =  $pdo -> query($sql);
 
                 }catch(Exception $e){
-                    //例外が起きたら、ブラウザにエラーメッセージを表示
                     var_dump($e->getMessage());
-                }	
+                }
 
-                $message ="$edit_flag"."番目の投稿を編集しました！";
+                foreach($results as $row){ //$rowの中にはテーブルのカラム名が入る
+                    $base_password = $row['password']; //パスワード取り出し
+                }
+
+                if($base_password == $password){
+                    //入力されたパスワードが正しい
+                    //編集機能
+
+                    //編集するsql
+                    $sql = "update board set name='$name',comment='$comment' where id = $edit_flag";
+
+                    try{
+                        //sql実行
+                        $results =  $pdo -> query($sql);
+
+                    }catch(Exception $e){
+                        //例外が起きたら、ブラウザにエラーメッセージを表示
+                        var_dump($e->getMessage());
+                    }	
+
+                    $message ="$edit_flag"."番目の投稿を編集しました！";
+
+                }else{
+                    //パスワードが合わない
+                    $message ="パスワードが間違っています！";
+                }
 
             }else{
-                //パスワードが合わない
-                $message ="パスワードが間違っています！";
+                //パスワード入力無し
+                $message ="パスワードが入力されていません！";
             }
-
-        }else{
-            //パスワード入力無し
-            $message ="パスワードが入力されていません！";
         }
-    }
 
-    //編集モード終了時に編集フラグを空にする
-    $edit_flag = '';
+        //編集モード終了時に編集フラグを空にする
+        $edit_flag = '';
 
     }else if(strval($edit_num) != ''){
-    //編集対象番号入力あり
+       //編集対象番号入力あり
         if(is_numeric($edit_num)){
             //編集指定番号が数字である
 
@@ -115,129 +115,129 @@
         }
 
     }else{
-    //新規投稿機能実行判定
-    if(strval($name) != '' && strval($comment) != ''){
-        //名前とコメント入力あり
-        $remove_num=''; //新規投稿なら、消去機能を実行させない
+        //新規投稿機能実行判定
+        if(strval($name) != '' && strval($comment) != ''){
+            //名前とコメント入力あり
+            $remove_num=''; //新規投稿なら、消去機能を実行させない
 
-        if($password != ''){
-            //パスワード入力あり
-            //新規投稿機能実行
+            if($password != ''){
+                //パスワード入力あり
+                //新規投稿機能実行
 
-            $id++; //投稿番号は行数+1
+                $id++; //投稿番号は行数+1
 
-            //テーブルにデータを入力するSQLの準備
-            $sql = $pdo -> prepare("INSERT INTO board(id,name,comment,time,password) VALUES(:id,:name,:comment,:time,:password)");
+                //テーブルにデータを入力するSQLの準備
+                $sql = $pdo -> prepare("INSERT INTO board(id,name,comment,time,password) VALUES(:id,:name,:comment,:time,:password)");
 
-            //パラメーターの変数を設定
-            $sql -> bindParam(':id',$id,PDO::PARAM_INT);
-            $sql -> bindParam(':name',$name,PDO::PARAM_STR);
-            $sql -> bindParam(':comment',$comment,PDO::PARAM_STR);
-            $sql -> bindParam(':time',$time,PDO::PARAM_STR);
-            $sql -> bindParam(':password',$password,PDO::PARAM_STR);
+                //パラメーターの変数を設定
+                $sql -> bindParam(':id',$id,PDO::PARAM_INT);
+                $sql -> bindParam(':name',$name,PDO::PARAM_STR);
+                $sql -> bindParam(':comment',$comment,PDO::PARAM_STR);
+                $sql -> bindParam(':time',$time,PDO::PARAM_STR);
+                $sql -> bindParam(':password',$password,PDO::PARAM_STR);
 
-            //変数に値をセット
-            $time = date("Y年m月d日 H時i分s秒");
+                //変数に値をセット
+                $time = date("Y年m月d日 H時i分s秒");
 
-            $sql -> execute();
+                $sql -> execute();
 
-            $message= "新規投稿しました！";
+                $message= "新規投稿しました！";
 
-        }else{ 
-            //パスワード入力無し
-            $message= "パスワードを入力して下さい！";
-            $edit_name = $name;
-            $edit_comment = $comment;
+            }else{ 
+                //パスワード入力無し
+                $message= "パスワードを入力して下さい！";
+                $edit_name = $name;
+                $edit_comment = $comment;
+            }
         }
-    }
     }
 
     //消去機能実行判定
     if(strval($remove_num) != ''){
-    //消去指定番号入力あり
+        //消去指定番号入力あり
 
-    $edit_flag2 = $_POST['edit_flag']; //編集と消去が同時に実行されるのを防ぐため
+        $edit_flag2 = $_POST['edit_flag']; //編集と消去が同時に実行されるのを防ぐため
 
-    if(strval($edit_flag2) == '' && strval($edit_num) == ''){
-        //編集フラグが空白かつ編集フラグが空白
-        if(is_numeric($remove_num)){
-            //消去指定番号が数字
-            if($password != ''){
-                //パスワード入力あり
+        if(strval($edit_flag2) == '' && strval($edit_num) == ''){
+            //編集フラグが空白かつ編集フラグが空白
+            if(is_numeric($remove_num)){
+                //消去指定番号が数字
+                if($password != ''){
+                    //パスワード入力あり
 
-                //パスワードが正しいか調べる
+                    //パスワードが正しいか調べる
 
-                //指定idのパスワード取り出し
-                $sql = "SELECT * FROM board WHERE id = $remove_num";
+                    //指定idのパスワード取り出し
+                    $sql = "SELECT * FROM board WHERE id = $remove_num";
 
-                try{
-                $results =  $pdo -> query($sql);
+                    try{
+                    $results =  $pdo -> query($sql);
 
-                }catch(Exception $e){
-                var_dump($e->getMessage());
+                    }catch(Exception $e){
+                    var_dump($e->getMessage());
 
-                }
+                    }
 
-                foreach($results as $row){
-                    $base_password = $row['password'];
-                }
+                    foreach($results as $row){
+                        $base_password = $row['password'];
+                    }
 
-                if($base_password == $password){
-                //入力パスワードが正しい
-                //消去機能
+                    if($base_password == $password){
+                    //入力パスワードが正しい
+                    //消去機能
 
-                    //行数を取得
-                    $num = $id;
+                        //行数を取得
+                        $num = $id;
 
-                    //行を消去するsql発行
-                    $sql = "delete from board where id = $remove_num";
-                    $result = $pdo -> query($sql);
+                        //行を消去するsql発行
+                        $sql = "delete from board where id = $remove_num";
+                        $result = $pdo -> query($sql);
 
-                    //投稿番号を振りなおす機能
-                    //投稿番号を更新するSQLの準備
-                    $sql = $pdo -> prepare("update board set id = :new_id where id = :old_id");
+                        //投稿番号を振りなおす機能
+                        //投稿番号を更新するSQLの準備
+                        $sql = $pdo -> prepare("update board set id = :new_id where id = :old_id");
 
-                    $new_id = 1; //新しい投稿番号
-                    $old_id = 1; //元々の投稿番号
+                        $new_id = 1; //新しい投稿番号
+                        $old_id = 1; //元々の投稿番号
 
-                    while($new_id < $num){
-                        //データベースの行数分繰り返す
-                        if($old_id == $remove_num){
-                            //消去した行は投稿番号を更新しない
+                        while($new_id < $num){
+                            //データベースの行数分繰り返す
+                            if($old_id == $remove_num){
+                                //消去した行は投稿番号を更新しない
+                                $old_id++;
+                            }
+
+                            //パラメーターの変数を設定
+                            $sql -> bindParam(':new_id',$new_id,PDO::PARAM_INT);
+                            $sql -> bindParam(':old_id',$old_id,PDO::PARAM_INT);
+
+                            $sql -> execute();
+
+                            //id更新
+                            $new_id++;
                             $old_id++;
                         }
+                        $message ="$remove_num"."番目の投稿を削除しました！";
 
-                        //パラメーターの変数を設定
-                        $sql -> bindParam(':new_id',$new_id,PDO::PARAM_INT);
-                        $sql -> bindParam(':old_id',$old_id,PDO::PARAM_INT);
+                        //消去したら行数は減る
+                        $id--;
 
-                        $sql -> execute();
-
-                        //id更新
-                        $new_id++;
-                        $old_id++;
+                    }else{
+                        //パスワードが正しくない
+                        $message ="パスワードが間違っています！";
                     }
-                    $message ="$remove_num"."番目の投稿を削除しました！";
-
-                    //消去したら行数は減る
-                    $id--;
 
                 }else{
-                    //パスワードが正しくない
-                    $message ="パスワードが間違っています！";
+                    /*パスワード入力無し*/
+                    $message ="パスワードが入力されていません！";
+                    $input_remove = $remove_num;
                 }
 
             }else{
-                /*パスワード入力無し*/
-                $message ="パスワードが入力されていません！";
-                $input_remove = $remove_num;
+                //消去番号が数字以外の時
+                $message= "消去指定番号は数字で入力して下さい！";
             }
-
-        }else{
-            //消去番号が数字以外の時
-            $message= "消去指定番号は数字で入力して下さい！";
         }
-    }
     }
     ?>
 

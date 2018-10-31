@@ -1,0 +1,98 @@
+@charset "UTF-8";
+
+/*スレッドのタイトルを調整*/
+.thread_title{
+	font-size:25px;
+	font-weight:700;
+	padding-top:5%;
+	text-align:center;
+}
+
+fieldset.section{
+	border:1px solid #66B3FF;
+}
+
+.section_title{
+	font-size:20px;
+
+}
+
+.form_button{
+	padding-top:5%;
+	padding-left:14%;
+	display:inline-block;
+}
+
+
+/*スレッドの説明*/
+.agenda{
+	text-align:center;
+	padding-bottom:10%;
+}
+
+/*投稿名、投稿時間など*/
+.toukou{
+	padding-right:10%;
+}
+
+.balloon {
+    width: 100%;
+    margin: 1.5em 0;
+    overflow: hidden;
+}
+
+.balloon .faceicon {
+    float: left;
+    margin-right: -90px;
+    width: 80px;
+}
+
+.balloon .faceicon img{
+    width: 100%;
+    height: auto;
+    border: solid 2px #DDEEFF;
+    border-radius: 50%;
+}
+
+.balloon .chatting {
+    width: 100%;
+}
+
+.says {
+    display: inline-block;
+    position: relative; 
+    margin: 5px 0 0 105px;
+    padding: 17px 13px;
+    border-radius: 12px;
+    background: #DDEEFF;
+}
+
+.says:after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: 18px; 
+    left: -24px;
+    border: 12px solid transparent;
+    border-right: 12px solid #DDEEFF;
+}
+
+.says p {
+    margin: 0;
+    padding: 0;
+}
+
+.thread_edit {
+	padding-left:68%;
+
+}
+
+.form_conf{
+	display:inline-flex;
+
+}
+
+.form_padding{
+	padding:10px;
+
+}

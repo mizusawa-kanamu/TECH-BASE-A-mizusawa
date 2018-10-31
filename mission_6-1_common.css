@@ -1,0 +1,80 @@
+@charset "UTF-8";
+
+/*グローバルメニュー*/
+
+.global-nav{
+font-size: 13px;
+padding: 0px 15px;
+background-color: #404040;
+text-align:center;
+}
+
+.nav-list{
+margin :0px;
+padding :0px;
+}
+
+.nav-item {
+display: inline-block;
+padding-top: 5px;
+padding-right:20px;
+color: #fff;
+}
+
+
+
+a {
+text-decoration: none;
+}
+
+
+/*リンクの文字の色を変更*/
+
+a:link {
+color: #6666cd;
+}
+
+a:hover{
+text-decoration: underline;
+}
+
+
+
+.nav-item a:link {
+color: #bbffff;
+}
+
+.nav-item a:visited {
+color: #bbffff;
+}
+
+
+/*ヘッダー色変更*/
+.head-color {
+background-color: #DDEEFF;
+}
+
+header, nav, aside,section {
+display:block;
+}
+
+
+/*サイトとか文字幅を調節*/
+.container{
+max-width: 1000px;
+margin: 0 auto;
+width: 770px;
+position: relative;
+}
+
+/*タイトル位置*/
+.midasi{
+	font-family:sans-serif;;
+	font-size:50px;
+	text-align:center;
+}
+
+.message{
+	text-align:center;
+}
+

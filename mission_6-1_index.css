@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+
+ul.new {
+  list-style: none;
+}
+
+td{
+	padding-right:30px;
+
+}
